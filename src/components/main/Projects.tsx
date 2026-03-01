@@ -42,6 +42,22 @@ const projectsData: {
     tags: ['Next.js', 'React', 'TypeScript', 'Google OAuth'],
   },
   {
+    title: 'Tic-Tac-Toe Game',
+    description: 'A classic Tic-Tac-Toe game built with React.js as part of my React course. Interactive gameplay with a clean UI.',
+    imageURL: '/projects/tic-tac-toe.png',
+    github: '#',
+    live: 'https://react-js-tic-tac-toe-project.vercel.app/',
+    tags: ['React', 'JavaScript'],
+  },
+  {
+    title: 'Investment Calculator',
+    description: 'A React course project—investment calculator app to project returns over time with user-defined initial investment, annual contribution, and expected return.',
+    imageURL: '/projects/investment%20calculator.png',
+    github: '#',
+    live: 'https://react-invesment-calculator.vercel.app/',
+    tags: ['React', 'JavaScript'],
+  },
+  {
     title: 'Food Menu Web Application',
     description: 'A backend food menu web application using ASP.NET Core with RESTful APIs for CRUD operations on food items and categories. Integrated Entity Framework Core for data access and controller-based architecture for scalability.',
     imageURL: '/projects/food%20menu%20app.png',
@@ -68,22 +84,6 @@ const projectsData: {
     imageURL: '/projects/Social%20Media%20Web%20App%20-%20React%20%26%20Spring%20Boot.png',
     github: '#',
     tags: ['React', 'Spring Boot', 'Java', 'MySQL', 'Axios'],
-  },
-  {
-    title: 'Tic-Tac-Toe Game',
-    description: 'A classic Tic-Tac-Toe game built with React.js as part of my React course. Interactive gameplay with a clean UI.',
-    imageURL: '/projects/tic-tac-toe.png',
-    github: '#',
-    live: 'https://react-js-tic-tac-toe-project.vercel.app/',
-    tags: ['React', 'JavaScript'],
-  },
-  {
-    title: 'Investment Calculator',
-    description: 'A React course project—investment calculator app to project returns over time with user-defined initial investment, annual contribution, and expected return.',
-    imageURL: '/projects/investment%20calculator.png',
-    github: '#',
-    live: 'https://react-invesment-calculator.vercel.app/',
-    tags: ['React', 'JavaScript'],
   },
 ]
 
