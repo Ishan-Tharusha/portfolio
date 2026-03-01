@@ -91,8 +91,8 @@ export default function RootLayout({
     url: 'https://hasan-ashab.vercel.app',
     image: 'https://hasan-ashab.vercel.app/profile-pic.jpg',
     sameAs: [
-      'https://github.com/HasanAshab',
-      'https://linkedin.com/in/hasan-ashab',
+      'https://github.com/Ishan-Tharusha',
+      'https://www.linkedin.com/in/ishantharusha',
     ],
     knowsAbout: [
       'DevOps',
