@@ -13,6 +13,7 @@ import 'react-pdf/dist/Page/TextLayer.css'
 
 const ResumeSection = () => {
   const [error, setError] = useState<string | null>(null)
+  const [numPages, setNumPages] = useState<number | null>(null)
 
   useEffect(() => {
     import('react-pdf').then(({ pdfjs }) => {
@@ -20,6 +21,10 @@ const ResumeSection = () => {
         'https://cdn.jsdelivr.net/npm/pdfjs-dist@5.3.31/build/pdf.worker.min.mjs'
     })
   }, [])
+
+  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
+    setNumPages(numPages)
+  }
 
   const onDocumentLoadError = (error: Error) => {
     setError(error.message)
@@ -58,17 +63,22 @@ const ResumeSection = () => {
           ) : (
             <Document
               file="/resume.pdf"
+              onLoadSuccess={onDocumentLoadSuccess}
               onLoadError={onDocumentLoadError}
-              className="flex justify-center w-full"
+              className="flex flex-col items-center w-full"
             >
-              <Page
-                pageNumber={1}
-                className="flex justify-center"
-                renderTextLayer
-                renderAnnotationLayer
-                width={Math.min(890, typeof window !== 'undefined' ? window.innerWidth - 20 : 1200)}
-                scale={1}
-              />
+              {numPages !== null &&
+                Array.from(new Array(numPages), (_, index) => (
+                  <Page
+                    key={`page-${index + 1}`}
+                    pageNumber={index + 1}
+                    className="flex justify-center [&:not(:last-child)]:mb-4"
+                    renderTextLayer
+                    renderAnnotationLayer
+                    width={Math.min(890, typeof window !== 'undefined' ? window.innerWidth - 20 : 1200)}
+                    scale={1}
+                  />
+                ))}
             </Document>
           )}
         </div>

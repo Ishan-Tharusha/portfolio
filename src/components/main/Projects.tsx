@@ -12,37 +12,78 @@ import Image from 'next/image'
 import { FaGithub } from 'react-icons/fa'
 import { Badge } from '../ui/badge'
 import { BentoGrid, BentoGridItem } from '../ui/bento-grid'
-import { Tags } from 'lucide-react'
-import { useState, useMemo } from 'react'
+import { Tags, X, ChevronLeft, ChevronRight, ImageIcon } from 'lucide-react'
+import { useState, useMemo, useEffect } from 'react'
 
-const projectsData = [
+const projectsData: {
+  title: string
+  description: string
+  imageURL: string
+  images?: string[]
+  github: string
+  live?: string
+  tags: string[]
+}[] = [
+  {
+    title: 'Cricket Scorer App',
+    description: 'A Next.js cricket scoring app to create players and teams, run custom matches with custom balls per over, mark live scores, and share with friends. Users can manage their profile and sign in with Google OAuth.',
+    imageURL: '/projects/cricketscorer/crick1.png',
+    images: [
+      '/projects/cricketscorer/crick1.png',
+      '/projects/cricketscorer/cric2.png',
+      '/projects/cricketscorer/cric3.png',
+      '/projects/cricketscorer/crick4.png',
+      '/projects/cricketscorer/crick5.png',
+      '/projects/cricketscorer/crick6.png',
+      '/projects/cricketscorer/crick%207.png',
+    ],
+    github: 'https://github.com/Ishan-Tharusha/CricketScorer',
+    live: 'https://cricket-scorer-nu.vercel.app/',
+    tags: ['Next.js', 'React', 'TypeScript', 'Google OAuth'],
+  },
   {
     title: 'Food Menu Web Application',
     description: 'A backend food menu web application using ASP.NET Core with RESTful APIs for CRUD operations on food items and categories. Integrated Entity Framework Core for data access and controller-based architecture for scalability.',
-    imageURL: '/food-menu-app.png',
+    imageURL: '/projects/food%20menu%20app.png',
     github: '#',
     tags: ['.NET', 'ASP.NET Core', 'C#', 'REST API', 'Entity Framework'],
   },
   {
     title: 'Online Text Editor',
     description: 'A web-based text editor built with ASP.NET Core MVC supporting CRUD operations to create, edit, and save documents online. Uses Entity Framework Core for data persistence with a responsive UI.',
-    imageURL: '/text-editor-app.png',
+    imageURL: '/projects/Online%20Text%20Editor%20-%20ASP.NET%20Core%20MV.png',
     github: '#',
     tags: ['.NET', 'ASP.NET Core MVC', 'C#', 'Entity Framework', 'REST API'],
   },
   {
     title: 'Online Car Rental Service',
     description: 'A full-stack car rental web application with admin and employee panels for managing bookings, users, and vehicle availability. Built with the MERN stack with RESTful APIs, MongoDB, React Router, and CRUD operations.',
-    imageURL: '/car-rental-app.png',
+    imageURL: '/projects/Online%20Car%20Rental%20Service%20-%20MERN%20Stack.png',
     github: '#',
     tags: ['MongoDB', 'Express.js', 'React', 'Node.js', 'MERN Stack'],
   },
   {
     title: 'Social Media Web App',
     description: 'A social media platform with user registration, posting, and follow/unfollow features. Built with a modern React frontend, Spring Boot RESTful backend, Axios for API communication, and MySQL for data management.',
-    imageURL: '/social-media-app.png',
+    imageURL: '/projects/Social%20Media%20Web%20App%20-%20React%20%26%20Spring%20Boot.png',
     github: '#',
     tags: ['React', 'Spring Boot', 'Java', 'MySQL', 'Axios'],
+  },
+  {
+    title: 'Tic-Tac-Toe Game',
+    description: 'A classic Tic-Tac-Toe game built with React.js as part of my React course. Interactive gameplay with a clean UI.',
+    imageURL: '/projects/tic-tac-toe.png',
+    github: '#',
+    live: 'https://react-js-tic-tac-toe-project.vercel.app/',
+    tags: ['React', 'JavaScript'],
+  },
+  {
+    title: 'Investment Calculator',
+    description: 'A React course project—investment calculator app to project returns over time with user-defined initial investment, annual contribution, and expected return.',
+    imageURL: '/projects/investment%20calculator.png',
+    github: '#',
+    live: 'https://react-invesment-calculator.vercel.app/',
+    tags: ['React', 'JavaScript'],
   },
 ]
 
@@ -68,6 +109,38 @@ const BlogIndicator = () => (
 const Projects = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([])
   const [showAll, setShowAll] = useState(false)
+  const [lightboxImage, setLightboxImage] = useState<{
+    src: string
+    title: string
+    images?: string[]
+    currentIndex?: number
+  } | null>(null)
+  const [slideIndex, setSlideIndex] = useState(0)
+
+  useEffect(() => {
+    if (!lightboxImage) return
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightboxImage(null)
+    }
+    document.body.style.overflow = 'hidden'
+    document.addEventListener('keydown', handleEscape)
+    return () => {
+      document.body.style.overflow = ''
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [lightboxImage])
+
+  const lightboxImages = lightboxImage?.images ?? (lightboxImage ? [lightboxImage.src] : [])
+  const lightboxCurrentSrc = lightboxImages[slideIndex] ?? lightboxImage?.src ?? ''
+  const hasMultipleImages = lightboxImages.length > 1
+
+  useEffect(() => {
+    if (lightboxImage?.images && lightboxImage.currentIndex != null) {
+      setSlideIndex(lightboxImage.currentIndex)
+    } else {
+      setSlideIndex(0)
+    }
+  }, [lightboxImage?.title, lightboxImage?.currentIndex, lightboxImage?.images])
 
   // Filter projects based on selected tags
   const filteredProjects = useMemo(() => {
@@ -190,7 +263,7 @@ const Projects = () => {
         </motion.div>
       </div>
 
-      <BentoGrid className="max-w-6xl mx-auto [@media(max-width:425px)]:grid-cols-1">
+      <BentoGrid className="max-w-6xl mx-auto md:auto-rows-[26rem] [@media(max-width:425px)]:grid-cols-1">
         {projectsToDisplay.map((project, i) => {
           const isFifthProject = !showAll && i === 4
           const isHiddenProject = !showAll && i >= 5
@@ -203,7 +276,7 @@ const Projects = () => {
                 title={project.title}
                 description={
                   <div className="space-y-1 text-sm text-foreground">
-                    <p>{project.description}</p>
+                    <p className="line-clamp-2">{project.description}</p>
                     <div className="flex flex-wrap gap-3 ">
                       <Badge asChild variant="secondary" className="gap-1 rounded-full">
                         <a
@@ -256,16 +329,34 @@ const Projects = () => {
                   </div>
                 }
                 header={
-                  <div className="relative w-full h-full [@media(max-width:425px)]:min-h-[9rem] min-h-[6rem] rounded-xl overflow-hidden">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setLightboxImage({
+                        src: project.imageURL,
+                        title: project.title,
+                        images: project.images,
+                        currentIndex: 0,
+                      })
+                    }
+                    className="group relative w-full h-full [@media(max-width:425px)]:min-h-[14rem] min-h-[12rem] rounded-xl overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    title={`View ${project.images?.length ? `${project.images.length} images` : 'full image'}: ${project.title}`}
+                  >
                     <Image
                       src={project.imageURL}
                       alt={project.title}
-                      className="object-cover"
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, 50vw"
                       quality={80}
                       fill
                     />
-                  </div>
+                    <div className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-2 rounded-b-xl bg-black/60 py-2 text-sm font-medium text-white backdrop-blur-sm transition-opacity group-hover:bg-black/70">
+                      <ImageIcon className="h-4 w-4" />
+                      <span>
+                        View {project.images?.length ? `(${project.images.length} images)` : 'image'}
+                      </span>
+                    </div>
+                  </button>
                 }
                 className={isFifthProject ? 'blur-[3px] pointer-events-none' : ''}
               />
@@ -308,6 +399,96 @@ const Projects = () => {
           </div>
         )}
       </BentoGrid>
+
+      {/* Full-image lightbox modal with optional slideshow */}
+      {lightboxImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
+          onClick={() => setLightboxImage(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="View full project image"
+        >
+          <button
+            type="button"
+            onClick={() => setLightboxImage(null)}
+            className="absolute top-4 right-4 z-10 rounded-full bg-white/10 p-2 text-white hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white"
+            aria-label="Close"
+          >
+            <X className="h-6 w-6" />
+          </button>
+          <div
+            className="relative flex max-h-[90vh] w-full max-w-5xl flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <p className="mb-2 text-center text-sm font-medium text-white">
+              {lightboxImage.title}
+              {hasMultipleImages && (
+                <span className="ml-2 text-white/70">
+                  ({slideIndex + 1} / {lightboxImages.length})
+                </span>
+              )}
+            </p>
+            <div className="relative flex w-full items-center gap-2">
+              {hasMultipleImages && (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setSlideIndex((i) => (i === 0 ? lightboxImages.length - 1 : i - 1))
+                  }}
+                  className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white md:-left-12"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="h-8 w-8" />
+                </button>
+              )}
+              <div className="relative min-h-[50vh] max-h-[85vh] w-full overflow-auto rounded-lg bg-black/50 flex items-center justify-center flex-1">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  key={lightboxCurrentSrc}
+                  src={lightboxCurrentSrc}
+                  alt={`${lightboxImage.title} - image ${slideIndex + 1}`}
+                  className="max-h-[85vh] w-auto max-w-full object-contain"
+                  style={{ height: 'auto' }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
+              {hasMultipleImages && (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setSlideIndex((i) => (i === lightboxImages.length - 1 ? 0 : i + 1))
+                  }}
+                  className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white md:-right-12"
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="h-8 w-8" />
+                </button>
+              )}
+            </div>
+            {hasMultipleImages && (
+              <div className="mt-3 flex gap-1.5">
+                {lightboxImages.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setSlideIndex(idx)
+                    }}
+                    className={`h-2 rounded-full transition-all ${
+                      idx === slideIndex ? 'w-6 bg-primary' : 'w-2 bg-white/40 hover:bg-white/60'
+                    }`}
+                    aria-label={`Go to image ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </section>
   )
 }
