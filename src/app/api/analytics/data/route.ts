@@ -1,11 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabaseAdmin } from '@/lib/supabase';
+import { getSupabaseAdmin } from '@/lib/supabase';
 
-// Simple authentication - in production, use proper auth
 const ADMIN_TOKEN = process.env.ANALYTICS_ADMIN_TOKEN || 'your-secret-admin-token';
 
 export async function GET(request: NextRequest) {
   try {
+    let supabaseAdmin;
+    try {
+      supabaseAdmin = getSupabaseAdmin();
+    } catch {
+      return NextResponse.json({ error: 'Analytics storage is not configured' }, { status: 503 });
+    }
     // Check authentication
     const authHeader = request.headers.get('authorization');
     const token = authHeader?.replace('Bearer ', '');

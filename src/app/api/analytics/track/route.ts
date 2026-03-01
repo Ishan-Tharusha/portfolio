@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabase';
 
 interface AnalyticsEvent {
   event_type: string;
@@ -13,6 +13,15 @@ interface AnalyticsEvent {
 
 export async function POST(request: NextRequest) {
   try {
+    let supabase;
+    try {
+      supabase = getSupabase();
+    } catch {
+      return NextResponse.json(
+        { error: 'Analytics storage is not configured' },
+        { status: 503 }
+      );
+    }
     const event: AnalyticsEvent = await request.json();
     
     // Get client IP
