@@ -1,109 +1,93 @@
-
-# Hasan Ashab - DevOps & Cloud Engineer Portfolio
+# Ishan Tharusha - Full-Stack Developer Portfolio
 
 [![Next.js](https://img.shields.io/badge/Next.js-15.3.3-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
 [![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000?style=flat-square&logo=vercel)](https://vercel.com/)
 
-> Professional portfolio website showcasing DevOps and Cloud Engineering expertise, built with modern web technologies and optimized for performance and SEO.
+> Personal portfolio website showcasing Full-Stack Development projects and skills, built with Next.js, TypeScript, and Tailwind CSS.
 
 ## 🚀 Live Demo
 
-Visit the live portfolio: [https://hasan-ashab.vercel.app](https://hasan-ashab.vercel.app)
+**Live portfolio:** [https://portfolio-yy9r.vercel.app](https://portfolio-yy9r.vercel.app)
 
 ## 👨‍💻 About Me
 
-I'm **Hasan Ashab**, a passionate **DevOps Engineer** and **Cloud Specialist** with expertise in:
+I'm **Ishan Tharusha**, a **Junior Full-Stack Developer** passionate about building end-to-end web applications. My focus includes:
 
-- ☁️ **Cloud Platforms**: AWS, Azure, Google Cloud Platform
-- 🐳 **Containerization**: Docker, Kubernetes, Helm
-- 🔄 **CI/CD**: Jenkins, GitHub Actions, GitLab CI/CD
-- 🏗️ **Infrastructure as Code**: Terraform, Ansible, CloudFormation
-- 📊 **Monitoring**: Prometheus, Grafana, ELK Stack
-- 🔒 **Security**: DevSecOps, Container Security, Compliance
+- 🌐 **Front-End**: React, Next.js, TypeScript, HTML, CSS, Tailwind CSS
+- ⚙️ **Back-End**: ASP.NET Core, Node.js, Express.js, Spring Boot
+- 🗄️ **Databases**: MongoDB, MySQL
+- 🛠️ **Languages**: C#, Java, JavaScript, TypeScript, Python
+- 📦 **Tools**: Git, GitHub, Postman, Docker
 
 ## 🛠️ Tech Stack
 
 ### Frontend
-- **Framework**: Next.js 15.3.3 with App Router
+- **Framework**: Next.js 15 with App Router
 - **Language**: TypeScript
-- **Styling**: Tailwind CSS 4.0
+- **Styling**: Tailwind CSS
 - **UI Components**: Radix UI, ShadCN UI
 - **Animations**: Framer Motion
-- **Icons**: React Icons, Tabler Icons, Heroicons
+- **Icons**: React Icons, Tabler Icons, Lucide
 
 ### Development & Deployment
 - **Package Manager**: npm
-- **Deployment**: Vercel (with Cloudflare Pages support)
+- **Deployment**: Vercel
 - **Analytics**: Vercel Analytics
-- **Linting**: ESLint, Stylelint
+- **Linting**: ESLint
 - **Type Checking**: TypeScript
-
-### DevOps & Cloud Tools Featured
-- **AWS Services**: EC2, ECS, EKS, Lambda, S3, RDS, CloudWatch
-- **Containerization**: Docker, Kubernetes
-- **CI/CD**: Jenkins, GitHub Actions
-- **Infrastructure**: Terraform, Ansible
-- **Monitoring**: Prometheus, Grafana
 
 ## 🎯 Features
 
 ### 🔍 SEO Optimized
-- Comprehensive meta tags and Open Graph data
-- Structured data (JSON-LD) for better search engine understanding
-- Optimized sitemap and robots.txt
-- Semantic HTML structure
-- Fast loading times and Core Web Vitals optimization
+- Meta tags and Open Graph data
+- Structured data (JSON-LD)
+- Semantic HTML
+- Optimized performance
 
 ### 📱 Responsive Design
-- Mobile-first approach
-- Optimized for all device sizes
+- Mobile-first layout
+- Works on all screen sizes
 - Touch-friendly navigation
-- Progressive Web App features
 
 ### ⚡ Performance
 - Server-side rendering (SSR)
-- Image optimization with Next.js Image component
+- Next.js Image optimization
 - Code splitting and lazy loading
-- Optimized bundle size
 
 ### 🎨 Modern UI/UX
 - Dark/Light theme toggle
-- Smooth animations and transitions
-- Interactive components
-- Accessible design (WCAG compliant)
+- Smooth animations
+- Accessible design
 
 ## 📁 Project Structure
 
 ```
 src/
-├── app/                          # Next.js App Router
-│   ├── layout.tsx               # Root layout with SEO metadata
-│   ├── page.tsx                 # Homepage
-│   ├── sitemap.ts              # Dynamic sitemap generation
-│   ├── robots.ts               # Robots.txt configuration
-│   ├── devops-engineer/        # DevOps engineer page
-│   ├── cloud-engineer/         # Cloud engineer page
-│   └── blog/                   # Blog posts
-├── components/                  # React components
-│   ├── main/                   # Main page sections
-│   ├── sub/                    # Sub-components
-│   └── ui/                     # Reusable UI components
-└── utils/                      # Utility functions
+├── app/                    # Next.js App Router
+│   ├── layout.tsx         # Root layout with SEO metadata
+│   ├── page.tsx           # Homepage
+│   └── api/               # API routes
+├── components/
+│   ├── main/              # Main sections (Projects, Skills, Timeline, etc.)
+│   ├── sub/               # Sub-components (Hero, SkillDataProvider)
+│   └── ui/                # Reusable UI components
+├── constants/             # App constants (skills, etc.)
+└── lib/                   # Utilities
 ```
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/HasanAshab/portfolio.git
+   git clone https://github.com/Ishan-Tharusha/portfolio.git
    cd portfolio
    ```
 
@@ -112,11 +96,11 @@ src/
    npm install
    ```
 
-3. **Set up environment variables**
+3. **Set up environment variables** (if needed)
    ```bash
    cp .env.example .env.local
    ```
-   Fill in your environment variables in `.env.local`
+   Fill in your variables in `.env.local` (e.g. contact form, analytics).
 
 4. **Run the development server**
    ```bash
@@ -138,70 +122,42 @@ npm start
 ```bash
 npm run deploy
 ```
+Or connect your GitHub repo to [Vercel](https://vercel.com) for automatic deployments.
 
 ## 🔧 Configuration
 
-### SEO Configuration
-The portfolio is optimized for search engines with:
-- Meta tags in `src/app/layout.tsx`
-- Structured data for better search results
-- Optimized images and performance
-- Semantic HTML structure
+### SEO
+- Meta tags and Open Graph in `src/app/layout.tsx`
+- Structured data for search engines
+- Canonical URL and sitemap support
 
-### Analytics
-Vercel Analytics is integrated for performance monitoring and user insights.
+### Theme
+- Light and dark themes with system preference detection.
 
-### Theme Configuration
-The portfolio supports both light and dark themes with system preference detection.
+## 📞 Contact
 
-## 📊 SEO Keywords
+**Ishan Tharusha** – Full-Stack Developer
 
-This portfolio is optimized for the following search terms:
-- DevOps Portfolio
-- Cloud Engineer Portfolio
-- DevOps Engineer
-- Cloud Engineer
-- Hasan Ashab
-- Hasan Ashab Portfolio
-- Portfolio Website
-- AWS DevOps
-- Kubernetes Engineer
-- Docker Specialist
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+- 🌐 **Portfolio:** [https://portfolio-yy9r.vercel.app](https://portfolio-yy9r.vercel.app)
+- 💼 **LinkedIn:** [linkedin.com/in/ishantharusha](https://www.linkedin.com/in/ishantharusha)
+- 🐙 **GitHub:** [github.com/Ishan-Tharusha](https://github.com/Ishan-Tharusha)
+- 📧 **Email:** [Ishantharusha02@gmail.com](mailto:Ishantharusha02@gmail.com)
+- 📱 **Phone:** +94 78 673 3876  
+- 📍 **Location:** Sri Lanka
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 📞 Contact
-
-**Hasan Ashab** - DevOps & Cloud Engineer
-
-- 🌐 Website: [https://hasan-ashab.vercel.app](https://hasan-ashab.vercel.app)
-- 💼 LinkedIn: [https://linkedin.com/in/hasanashab](https://linkedin.com/in/hasanashab)
-- 🐙 GitHub: [https://github.com/HasanAshab](https://github.com/HasanAshab)
-- 📧 Email: [contact@hasanashab.dev](mailto:contact@hasanashab.dev)
-
 ## 🙏 Acknowledgements
 
-This project is a fork of [Ashlok Chaudhary](https://github.com/ashlok2003)'s portfolio. All credits goes to him for the initial design and structure.
+Thanks to the open-source community and the original portfolio template this project was built upon.
 
-### Additional Resources
+### Resources
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [Vercel Deployment Guide](https://vercel.com/docs)
-- [AWS Documentation](https://docs.aws.amazon.com/)
-- [Kubernetes Documentation](https://kubernetes.io/docs/)
+- [Vercel Deployment](https://vercel.com/docs)
 
 ---
 
-⭐ **Star this repository if you found it helpful!**
+⭐ **Star this repo if you find it helpful!**
