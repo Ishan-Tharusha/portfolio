@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     siteName: 'Ishan Tharusha Portfolio',
     images: [
       {
-        url: '/profile-pic.png',
+        url: '/profile_pic.jpg',
         width: 1200,
         height: 630,
         alt: 'Ishan Tharusha - Full-Stack Developer',
@@ -89,7 +89,7 @@ export default function RootLayout({
     jobTitle: 'DevOps & Cloud Engineer',
     description: 'Experienced DevOps and Cloud Engineer specializing in AWS, Kubernetes, Docker, and CI/CD automation',
     url: 'https://hasan-ashab.vercel.app',
-    image: 'https://hasan-ashab.vercel.app/profile-pic.jpg',
+    image: '/profile_pic.jpg',
     sameAs: [
       'https://github.com/Ishan-Tharusha',
       'https://www.linkedin.com/in/ishantharusha',

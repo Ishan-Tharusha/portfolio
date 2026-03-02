@@ -87,10 +87,21 @@ const projectsData: {
   },
 ]
 
-// Extract all unique tags from projects
-const allTags = Array.from(
-  new Set(projectsData.flatMap(project => project.tags))
-).sort();
+// Extract all unique tags from projects (trimmed, no duplicates, case-insensitive dedupe)
+const allTags = (() => {
+  const seenLower = new Set<string>()
+  const result: string[] = []
+  for (const tag of projectsData.flatMap(project => project.tags)) {
+    const t = tag.trim()
+    if (!t) continue
+    const key = t.toLowerCase()
+    if (!seenLower.has(key)) {
+      seenLower.add(key)
+      result.push(t)
+    }
+  }
+  return result.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }))
+})();
 
 const LiveIndicator = () => (
   <span className="relative flex h-2 w-2">
@@ -142,12 +153,14 @@ const Projects = () => {
     }
   }, [lightboxImage?.title, lightboxImage?.currentIndex, lightboxImage?.images])
 
-  // Filter projects based on selected tags
+  // Filter projects based on selected tags (case-insensitive match)
   const filteredProjects = useMemo(() => {
     if (selectedTags.length === 0) return projectsData
-
+    const selectedLower = selectedTags.map(t => t.toLowerCase())
     return projectsData.filter(project =>
-      selectedTags.every(tag => project.tags.includes(tag))
+      selectedLower.every(tag =>
+        project.tags.some(pt => pt.trim().toLowerCase() === tag)
+      )
     )
   }, [selectedTags])
 

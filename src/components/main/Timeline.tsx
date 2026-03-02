@@ -27,7 +27,7 @@ export const timelineData: TimelineItem[] = [
     title: 'B.Sc. (Hons) in Information Technology',
     company: 'Sri Lanka Institute of Information Technology',
     location: 'Sri Lanka',
-    imageURL: '/sliit.png',
+    imageURL: '/SLIIT_Logo_Crest.png',
     date: '2022 – 2026',
     description: 'Pursuing a Bachelor of Science (Honours) degree in Information Technology, gaining in-depth knowledge in software engineering, web development, databases, and cloud computing.',
     achievements: [
@@ -45,7 +45,7 @@ export const timelineData: TimelineItem[] = [
     title: 'G.C.E. Advanced Level – Physical Science Stream',
     company: 'Dudley Senanayake Central College',
     location: 'Sri Lanka',
-    imageURL: '',
+    imageURL: '/dscc%20logo.jpg',
     date: '2016 – 2018',
     description: 'Completed G.C.E. Advanced Level examinations in the Physical Science stream, building a strong foundation in mathematics and sciences.',
     achievements: [],

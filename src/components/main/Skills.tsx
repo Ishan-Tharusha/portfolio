@@ -2,7 +2,6 @@
 
 import React, { useMemo } from 'react'
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import { Skill, skills, skillCategories } from '@/constants'
 import SkillDataProvider from '../sub/SkillDataProvider'
 
@@ -76,7 +75,7 @@ const Skills = () => {
         </p>
       </motion.div>
 
-      <div className="w-full max-w-6xl relative z-10 space-y-14">
+      <div className="w-full max-w-6xl mx-auto relative z-10 space-y-14">
         {skillsByCategory.map((group, groupIndex) => (
           <motion.div
             key={group.categoryId}
@@ -86,28 +85,19 @@ const Skills = () => {
             transition={{ duration: 0.5, delay: groupIndex * 0.1 }}
             className="space-y-6"
           >
-            {/* Section header with image */}
-            <div className="flex flex-col sm:flex-row items-center gap-4 pb-2 border-b border-primary/20">
-              <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-card/80 border border-primary/20 flex items-center justify-center overflow-hidden shrink-0">
-                <Image
-                  src={group.category.image}
-                  alt={group.category.imageAlt}
-                  width={40}
-                  height={40}
-                  className="object-contain"
-                />
-              </div>
+            {/* Section header */}
+            <div className="pb-2 border-b border-primary/20 text-center">
               <h3 className="text-xl sm:text-2xl font-semibold text-foreground">
                 {group.category.label}
               </h3>
             </div>
 
-            <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            <div className="flex flex-wrap justify-center gap-6">
               {group.items.map((skill, index) => (
                 <motion.div
                   key={skill.skill_name}
                   title={skill.skill_name}
-                  className="group relative flex flex-col items-center p-4 rounded-xl bg-card/60 backdrop-blur-sm border border-primary/20 hover:border-primary/40 hover:bg-card/80 transition-all duration-300 transform hover:-translate-y-2 shadow-lg hover:shadow-xl"
+                  className="group relative flex flex-col items-center justify-center p-4 min-h-[7rem] w-28 sm:w-32 md:w-36 lg:w-40 rounded-xl bg-card/60 backdrop-blur-sm border border-primary/20 hover:border-primary/40 hover:bg-card/80 transition-all duration-300 transform hover:-translate-y-2 shadow-lg hover:shadow-xl shrink-0"
                   role="listitem"
                   aria-label={skill.skill_name}
                   initial={{ opacity: 0, y: 20 }}
@@ -118,13 +108,13 @@ const Skills = () => {
                   whileTap={{ scale: 0.95 }}
                 >
                   <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-primary/20 via-blue-500/10 to-transparent blur-sm"></div>
-                  <div className="relative flex flex-col items-center gap-3 z-10">
+                  <div className="relative flex flex-col items-center justify-center gap-3 z-10 w-full">
                     <SkillDataProvider
                       src={skill.Image}
                       width={32}
                       height={32}
                       index={index}
-                      className="group-hover:scale-110 transition-transform duration-300"
+                      className="group-hover:scale-110 transition-transform duration-300 shrink-0"
                     />
                     <span className="text-xs font-medium text-foreground text-center leading-tight line-clamp-2">
                       {skill.skill_name}
