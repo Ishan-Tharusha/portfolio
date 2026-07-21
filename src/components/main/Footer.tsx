@@ -2,81 +2,101 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { FC, useEffect, useState } from 'react'
-import { FaLinkedin, FaTwitter } from 'react-icons/fa'
-import { RxGithubLogo } from 'react-icons/rx'
+import { FC } from 'react'
+import { FaLinkedin, FaGithub } from 'react-icons/fa'
 import { TrackableElement, TrackableContact } from '@/components/analytics/TrackableElement'
 
 const Footer: FC = () => {
   const socialLinks = [
     {
       href: 'https://github.com/Ishan-Tharusha',
-      icon: <RxGithubLogo className="w-5 h-5" />,
+      icon: <FaGithub className="w-4 h-4" />,
       label: 'GitHub',
+      color: 'hover:text-violet-400 hover:border-violet-400/50 hover:bg-violet-500/10',
     },
     {
       href: 'https://www.linkedin.com/in/ishantharusha',
-      icon: <FaLinkedin className="w-5 h-5" />,
+      icon: <FaLinkedin className="w-4 h-4" />,
       label: 'LinkedIn',
+      color: 'hover:text-cyan-400 hover:border-cyan-400/50 hover:bg-cyan-500/10',
     },
   ]
 
-  const quickLinks = [
+  const navLinks = [
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
     { name: 'Education', href: '#education' },
     { name: 'Projects', href: '#projects' },
-  ]
-
-  const servicesLinks = [
     { name: 'Resume', href: '#resume' },
+    { name: 'Contact', href: '#contact' },
   ]
 
-  const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        staggerChildren: 0.2,
-      },
-    },
-  }
-
-  const childVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-  }
+  const techStack = ['ASP.NET Core', 'Node.js', 'React', 'Next.js', 'Spring Boot', 'TypeScript']
 
   return (
-    <footer className="relative w-full px-6 py-12 mt-20 bg-background text-foreground border-t border-border transition-colors">
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500" />
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.div className="space-y-4" variants={childVariants}>
-            <h1 title="Ishan Tharusha" className="text-2xl font-extrabold bg-clip-text">Ishan Tharusha</h1>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Full-Stack Developer building web applications with ASP.NET Core, Node.js, React, and Spring Boot.
-            </p>
-          </motion.div>
+    <footer className="relative w-full border-t border-border/30 mt-8 overflow-hidden">
+      {/* Gradient top border */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-violet-500/60 to-transparent" />
 
-          <motion.div className="space-y-4" variants={childVariants}>
-            <h2 title="Quick Links" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-              Quick Links
-            </h2>
-            <ul className="space-y-2 text-sm">
-              {quickLinks.map((item) => (
+      {/* Background */}
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] bg-violet-600/5 rounded-full blur-[80px]" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
+        >
+          {/* Brand */}
+          <div className="space-y-4">
+            <div>
+              <h2 className="text-xl font-black gradient-text-static">Ishan Tharusha</h2>
+              <p className="text-xs font-mono-code text-muted-foreground mt-1">
+                {'<Junior Full-Stack Developer />'}
+              </p>
+            </div>
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
+              Building end-to-end web applications with modern technologies. Based in Sri Lanka, open to remote opportunities worldwide.
+            </p>
+            {/* Social links */}
+            <div className="flex gap-2">
+              {socialLinks.map((link) => (
+                <TrackableContact key={link.label} method={`footer-${link.label.toLowerCase()}`}>
+                  <motion.a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex items-center gap-1.5 px-3 py-2 glass-card rounded-xl text-xs text-muted-foreground border border-border/50 transition-all duration-200 ${link.color}`}
+                    whileHover={{ y: -2 }}
+                    aria-label={`Visit my ${link.label} profile`}
+                  >
+                    {link.icon}
+                    <span>{link.label}</span>
+                  </motion.a>
+                </TrackableContact>
+              ))}
+            </div>
+          </div>
+
+          {/* Navigation */}
+          <div className="space-y-4">
+            <h3 className="text-xs font-mono-code text-muted-foreground uppercase tracking-wider">
+              // Navigation
+            </h3>
+            <ul className="grid grid-cols-2 gap-2">
+              {navLinks.map((item) => (
                 <li key={item.name}>
-                  <TrackableElement elementId={`footer-nav-${item.name.toLowerCase()}`} elementText={`Footer: ${item.name}`}>
+                  <TrackableElement
+                    elementId={`footer-nav-${item.name.toLowerCase()}`}
+                    elementText={`Footer: ${item.name}`}
+                  >
                     <a
                       href={item.href}
-                      className="hover:text-primary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="text-sm text-muted-foreground hover:text-violet-400 transition-colors duration-200 font-mono-code"
                       aria-label={`Navigate to ${item.name} section`}
                     >
                       {item.name}
@@ -85,55 +105,51 @@ const Footer: FC = () => {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
-          <motion.div className="space-y-4" variants={childVariants}>
-            <h2 title="Services" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-              Services
-            </h2>
-            <ul className="space-y-2 text-sm">
-              {servicesLinks.map((item) => (
-                <li key={item.name}>
-                  <TrackableElement elementId={`footer-service-${item.name.toLowerCase().replace(/\s+/g, '-')}`} elementText={`Service: ${item.name}`}>
-                    <a
-                      href={item.href}
-                      className="hover:text-primary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary"
-                      aria-label={`Learn about ${item.name}`}
-                    >
-                      {item.name}
-                    </a>
-                  </TrackableElement>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          <motion.div className="space-y-4" variants={childVariants}>
-            <h2 title="Connect" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-              Connect
-            </h2>
-            <div className="flex flex-wrap gap-3">
-              {socialLinks.map((link) => (
-                <TrackableContact key={link.label} method={`footer-${link.label.toLowerCase()}`}>
-                  <motion.a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center w-10 h-10 bg-muted rounded-full hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 hover:text-white transition-all duration-300"
-                    whileHover={{ scale: 1.2, rotate: 5 }}
-                    aria-label={`Visit my ${link.label} profile`}
-                  >
-                    {link.icon}
-                  </motion.a>
-                </TrackableContact>
+          {/* Tech stack */}
+          <div className="space-y-4">
+            <h3 className="text-xs font-mono-code text-muted-foreground uppercase tracking-wider">
+              // Tech Stack
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {techStack.map((tech) => (
+                <span key={tech} className="tag-pill text-[10px]">{tech}</span>
               ))}
             </div>
-            <div className="mt-4">
-              <p className="text-xs text-muted-foreground">
-                Full-Stack Developer · ASP.NET Core · React · Node.js · Spring Boot
+            <div className="pt-2">
+              <p className="text-xs text-muted-foreground font-mono-code">
+                📍 Sri Lanka · 🌍 Remote-friendly
               </p>
+              <a
+                href="mailto:Ishantharusha02@gmail.com"
+                className="text-xs text-violet-400 hover:text-violet-300 transition-colors font-mono-code"
+              >
+                Ishantharusha02@gmail.com
+              </a>
             </div>
-          </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Bottom bar */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-10 pt-6 border-t border-border/20 flex flex-col sm:flex-row items-center justify-between gap-3"
+        >
+          <p className="text-xs text-muted-foreground/60 font-mono-code">
+            © {new Date().getFullYear()} Ishan Tharusha. All rights reserved.
+          </p>
+          <p className="text-xs text-muted-foreground/40 font-mono-code">
+            Built with{' '}
+            <span className="text-violet-400/70">Next.js</span>
+            {' · '}
+            <span className="text-cyan-400/70">TypeScript</span>
+            {' · '}
+            <span className="text-pink-400/70">Tailwind CSS</span>
+          </p>
         </motion.div>
       </div>
     </footer>

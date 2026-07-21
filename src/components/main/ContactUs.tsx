@@ -1,20 +1,10 @@
 'use client'
 
 import { Variants, motion } from 'framer-motion'
-import { MessageCircle } from 'lucide-react'
+import { MessageCircle, Mail, Phone, MapPin, Copy, Check } from 'lucide-react'
 import { FC, FormEvent, useState } from 'react'
 import toast from 'react-hot-toast'
-import {
-  FaEnvelope,
-  FaMapMarkerAlt,
-  FaPaperPlane,
-  FaRegCopy,
-  FaSpinner,
-  FaUser,
-} from 'react-icons/fa'
-import { FaSquarePhone } from 'react-icons/fa6'
-import { buttonVariants } from '../ui/button'
-import { cn } from '@/lib/utils'
+import { FaGithub, FaLinkedin, FaPaperPlane, FaSpinner } from 'react-icons/fa'
 
 interface FormData {
   name: string
@@ -32,6 +22,7 @@ const ContactUs: FC = () => {
   })
   const [status, setStatus] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [copiedField, setCopiedField] = useState<string | null>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -50,208 +41,276 @@ const ContactUs: FC = () => {
       })
 
       if (response.ok) {
-        setStatus('Message sent successfully!')
+        setStatus('success')
         setFormData({ name: '', email: '', subject: '', message: '' })
       } else {
-        setStatus('Failed to send message. Please try again.')
+        setStatus('error')
       }
     } catch {
-      setStatus('An error occurred. Please try again later.')
+      setStatus('error')
     } finally {
       setIsSubmitting(false)
       setTimeout(() => setStatus(''), 5000)
     }
   }
 
-  const copyToClipboard = (text: string, label: string) => {
+  const copyToClipboard = (text: string, field: string, label: string) => {
     navigator.clipboard.writeText(text)
     toast.success(`${label} copied!`)
+    setCopiedField(field)
+    setTimeout(() => setCopiedField(null), 2000)
   }
 
-  const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 50, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { duration: 0.6, ease: 'easeOut' },
+  const contactInfo = [
+    {
+      icon: <Mail className="w-4 h-4 text-violet-400" />,
+      label: 'Email',
+      value: 'Ishantharusha02@gmail.com',
+      field: 'email',
+      href: 'mailto:Ishantharusha02@gmail.com',
     },
-    hover: {
-      scale: 1.02,
-      transition: { duration: 0.3 },
+    {
+      icon: <Phone className="w-4 h-4 text-cyan-400" />,
+      label: 'Phone',
+      value: '+94 78 673 3876',
+      field: 'phone',
+      href: 'tel:+94786733876',
     },
-  }
+    {
+      icon: <MapPin className="w-4 h-4 text-emerald-400" />,
+      label: 'Location',
+      value: 'Sri Lanka',
+      field: null,
+      href: null,
+    },
+  ]
 
-  const inputVariants: Variants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: (i: number) => ({
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.4, delay: i * 0.1 },
-    }),
-  }
+  const socialLinks = [
+    { href: 'https://github.com/Ishan-Tharusha', icon: <FaGithub className="w-5 h-5" />, label: 'GitHub', color: 'hover:text-violet-400 hover:border-violet-400/50 hover:bg-violet-500/10' },
+    { href: 'https://www.linkedin.com/in/ishantharusha', icon: <FaLinkedin className="w-5 h-5" />, label: 'LinkedIn', color: 'hover:text-cyan-400 hover:border-cyan-400/50 hover:bg-cyan-500/10' },
+  ]
+
+  const inputFields = [
+    { name: 'name', label: 'Your Name', type: 'text', icon: <MessageCircle className="w-4 h-4" /> },
+    { name: 'email', label: 'Email Address', type: 'email', icon: <Mail className="w-4 h-4" /> },
+    { name: 'subject', label: 'Subject', type: 'text', icon: <MessageCircle className="w-4 h-4" /> },
+  ]
 
   return (
-    <section id="contact" className="relative py-20 bg-background text-foreground transition-colors overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 -z-10">
-        {/* Floating Geometric Shapes */}
-        <div className="absolute top-20 left-12 w-32 h-32 bg-primary/10 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute top-60 right-16 w-20 h-20 bg-blue-500/20 rounded-lg rotate-45 animate-bounce"></div>
-        <div className="absolute bottom-40 left-1/3 w-16 h-16 bg-primary/15 rounded-full animate-ping"></div>
-        <div className="absolute bottom-20 right-1/4 w-24 h-24 bg-blue-400/10 rounded-lg rotate-12 float-animation"></div>
-        
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
-        
-        {/* Gradient Orbs */}
-        <div className="absolute top-1/4 right-1/2 translate-x-1/2 w-96 h-96 bg-gradient-to-r from-primary/20 via-blue-500/10 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-gradient-to-l from-blue-400/15 via-primary/10 to-transparent rounded-full blur-2xl"></div>
+    <section id="contact" className="relative py-24 overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <div className="absolute top-1/3 left-1/4 w-[500px] h-[400px] bg-violet-600/8 rounded-full blur-[100px]" />
+        <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[300px] bg-cyan-500/6 rounded-full blur-[80px]" />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header */}
         <motion.div
-          className="max-w-7xl mx-auto bg-card/60 backdrop-blur-sm border border-primary/20 rounded-2xl p-8 sm:p-10 shadow-2xl"
-          variants={cardVariants}
-          initial="hidden"
-          animate="visible"
-          whileHover="hover"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-16 space-y-4"
         >
-          <div className="flex flex-col md:flex-row gap-12">
-            <motion.div
-              className="w-full md:w-1/2 space-y-6"
-              variants={cardVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              <h2 title="Connect With Me" className="text-4xl font-extrabold bg-gradient-to-r from-foreground via-primary to-blue-500 bg-clip-text text-transparent">
-                Connect With Me
-              </h2>
-              <p className="text-muted-foreground leading-relaxed text-base">
-                Have a project in mind or a question? Reach out and let's turn your ideas into
-                reality.
-              </p>
-
-              <div className="space-y-5 text-foreground">
-                <div className="flex items-center gap-3">
-                  <FaEnvelope className="text-primary text-lg" />
-                  <span className="text-sm font-medium select-text">Ishantharusha02@gmail.com</span>
-                  <button
-                    title="Copy email address"
-                    onClick={() => copyToClipboard('Ishantharusha02@gmail.com', 'Email')}
-                    className="text-muted-foreground hover:text-primary transition"
-                    aria-label="Copy email"
-                  >
-                    <FaRegCopy />
-                  </button>
-                </div>
-                <div className="flex items-center gap-3">
-                  <FaSquarePhone className="text-primary text-lg" />
-                  <span className="text-sm font-medium select-text">+94786733876</span>
-                  <button
-                    title="Copy phone number"
-                    onClick={() => copyToClipboard('+94786733876', 'Phone number')}
-                    className="text-muted-foreground hover:text-primary transition"
-                    aria-label="Copy phone number"
-                  >
-                    <FaRegCopy />
-                  </button>
-                </div>
-                <div className="flex items-center gap-3">
-                  <FaMapMarkerAlt className="text-primary text-lg" />
-                  <span className="text-sm font-medium select-text">Sri Lanka</span>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              className="w-full md:w-1/2 space-y-6"
-              variants={cardVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              <form onSubmit={handleSubmit} className="space-y-5" aria-label="Contact Form">
-                {['name', 'email', 'subject'].map((field, i) => (
-                  <motion.div
-                    key={field}
-                    custom={i}
-                    variants={inputVariants}
-                    initial="hidden"
-                    animate="visible"
-                  >
-                    <div className="relative">
-                      {field === 'name' && (
-                        <FaUser className="absolute top-3.5 left-3 text-muted-foreground" />
-                      )}
-                      {field === 'email' && (
-                        <FaEnvelope className="absolute top-3.5 left-3 text-muted-foreground" />
-                      )}
-                      {field === 'subject' && (
-                        <MessageCircle className="absolute top-3.5 left-3 text-muted-foreground" />
-                      )}
-                      <input
-                        type={field === 'email' ? 'email' : 'text'}
-                        name={field}
-                        value={formData[field as keyof FormData]}
-                        onChange={handleChange}
-                        placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
-                        className="w-full pl-10 pr-4 py-3 bg-background/50 text-foreground rounded-none focus:outline-none focus:ring-2 focus:ring-primary placeholder-muted-foreground transition-all"
-                        required
-                        aria-label={field}
-                      />
-                    </div>
-                  </motion.div>
-                ))}
-                <motion.div custom={3} variants={inputVariants} initial="hidden" animate="visible">
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Please Drop Your Short Message..."
-                    className="w-full pl-4 pr-4 py-3 bg-background/50 text-foreground rounded-none h-36 resize-none focus:outline-none focus:ring-2 focus:ring-primary placeholder-muted-foreground transition-all"
-                    required
-                    aria-label="Message"
-                  />
-                </motion.div>
-                <motion.button
-                  title={isSubmitting ? 'Sending message...' : 'Send message'}
-                  type="submit"
-                  className={cn(
-                    buttonVariants({
-                      className:
-                        'w-full py-3 rounded-none flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed',
-                    }),
-                  )}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.98 }}
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <FaSpinner className="animate-spin" /> Sending...
-                    </>
-                  ) : (
-                    <>
-                      <FaPaperPlane /> Send Message
-                    </>
-                  )}
-                </motion.button>
-                {status && (
-                  <motion.p
-                    className={`text-center text-sm ${
-                      status.includes('successfully') ? 'text-green-500' : 'text-red-500'
-                    }`}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {status}
-                  </motion.p>
-                )}
-              </form>
-            </motion.div>
-          </div>
+          <p className="code-tag text-violet-accent">{'<Contact />'}</p>
+          <h2 title="Connect With Me" className="text-4xl sm:text-5xl font-black tracking-tight">
+            <span className="gradient-text">Let&apos;s</span>{' '}
+            <span className="text-foreground dark:text-white">Connect</span>
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+            Have a project in mind or a question? Reach out and let&apos;s turn your ideas into reality.
+          </p>
         </motion.div>
+
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
+          {/* Left: Contact info */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="space-y-8"
+          >
+            {/* Availability status */}
+            <div className="glass-card rounded-2xl p-6 space-y-2">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="available-badge">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
+                  </span>
+                  <code>Available for hire</code>
+                </span>
+              </div>
+              <h3 className="text-xl font-bold text-foreground">
+                Ready to collaborate on your next project
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                I&apos;m currently open to new opportunities. Whether it&apos;s a full-time role, freelance project, or just a chat about tech — feel free to reach out!
+              </p>
+            </div>
+
+            {/* Contact cards */}
+            <div className="space-y-3">
+              {contactInfo.map((item) => (
+                <motion.div
+                  key={item.label}
+                  whileHover={{ x: 4 }}
+                  className="glass-card rounded-xl px-4 py-3 flex items-center gap-3 group"
+                >
+                  <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-muted/30 flex items-center justify-center">
+                    {item.icon}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[10px] font-mono-code text-muted-foreground uppercase tracking-wider">{item.label}</p>
+                    {item.href ? (
+                      <a href={item.href} className="text-sm text-foreground hover:text-violet-400 transition-colors font-medium truncate block">
+                        {item.value}
+                      </a>
+                    ) : (
+                      <p className="text-sm text-foreground font-medium">{item.value}</p>
+                    )}
+                  </div>
+                  {item.field && (
+                    <button
+                      onClick={() => copyToClipboard(item.value, item.field!, item.label)}
+                      className="flex-shrink-0 text-muted-foreground hover:text-violet-400 transition-colors p-1.5 rounded-lg hover:bg-violet-500/10"
+                      title={`Copy ${item.label}`}
+                    >
+                      {copiedField === item.field ? (
+                        <Check className="w-3.5 h-3.5 text-emerald-400" />
+                      ) : (
+                        <Copy className="w-3.5 h-3.5" />
+                      )}
+                    </button>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Social links */}
+            <div className="space-y-3">
+              <p className="text-xs font-mono-code text-muted-foreground uppercase tracking-wider">// Connect on</p>
+              <div className="flex gap-3">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.label}
+                    className={`flex items-center gap-2 px-4 py-2.5 glass-card rounded-xl text-sm text-muted-foreground border border-border/50 transition-all duration-200 ${link.color}`}
+                  >
+                    {link.icon}
+                    <span className="font-medium">{link.label}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right: Contact form */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+          >
+            <form onSubmit={handleSubmit} className="glass-card rounded-2xl p-7 space-y-5" aria-label="Contact Form">
+              <h3 className="text-lg font-bold text-foreground font-mono-code">
+                <span className="text-violet-400">{'>'}</span> Send a message
+              </h3>
+
+              {/* Input fields */}
+              {inputFields.map((field, i) => (
+                <motion.div
+                  key={field.name}
+                  initial={{ opacity: 0, x: -12 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="relative"
+                >
+                  <label className="block text-xs font-mono-code text-muted-foreground mb-1.5 uppercase tracking-wider">
+                    {field.label}
+                  </label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground/60">
+                      {field.icon}
+                    </span>
+                    <input
+                      type={field.type}
+                      name={field.name}
+                      value={formData[field.name as keyof FormData]}
+                      onChange={handleChange}
+                      placeholder={field.label}
+                      required
+                      aria-label={field.label}
+                      className="input-neon w-full pl-9 pr-4 py-2.5 bg-background/50 text-foreground text-sm rounded-xl border border-border/50 transition-all duration-200 placeholder:text-muted-foreground/40 focus:bg-background/80"
+                    />
+                  </div>
+                </motion.div>
+              ))}
+
+              {/* Message textarea */}
+              <motion.div
+                initial={{ opacity: 0, x: -12 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.24 }}
+              >
+                <label className="block text-xs font-mono-code text-muted-foreground mb-1.5 uppercase tracking-wider">
+                  Message
+                </label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Tell me about your project or question..."
+                  required
+                  aria-label="Message"
+                  className="input-neon w-full px-4 py-3 bg-background/50 text-foreground text-sm rounded-xl border border-border/50 h-32 resize-none transition-all duration-200 placeholder:text-muted-foreground/40 focus:bg-background/80"
+                />
+              </motion.div>
+
+              {/* Submit button */}
+              <motion.button
+                title={isSubmitting ? 'Sending message...' : 'Send message'}
+                type="submit"
+                disabled={isSubmitting}
+                whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="btn-neon w-full py-3 flex items-center justify-center gap-2 text-sm font-semibold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed shadow-violet"
+              >
+                {isSubmitting ? (
+                  <>
+                    <FaSpinner className="animate-spin" /> Sending...
+                  </>
+                ) : (
+                  <>
+                    <FaPaperPlane className="text-sm" /> Send Message
+                  </>
+                )}
+              </motion.button>
+
+              {/* Status message */}
+              {status && (
+                <motion.p
+                  className={`text-center text-sm font-mono-code ${
+                    status === 'success' ? 'text-emerald-400' : 'text-red-400'
+                  }`}
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  {status === 'success'
+                    ? '✓ Message sent successfully!'
+                    : '✗ Failed to send. Please try again.'}
+                </motion.p>
+              )}
+            </form>
+          </motion.div>
+        </div>
       </div>
     </section>
   )

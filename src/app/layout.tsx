@@ -4,17 +4,21 @@ import { Navbar } from '@/components/main/Navbar'
 import { ThemeProvider } from '@/components/theme-provider'
 import { AnalyticsProvider } from '@/components/analytics/AnalyticsProvider'
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const inter = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  display: 'swap',
 })
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const jetbrainsMono = JetBrains_Mono({
+  variable: '--font-jetbrains-mono',
   subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
@@ -31,6 +35,10 @@ export const metadata: Metadata = {
     'Node.js',
     'Spring Boot',
     'portfolio website',
+    'TypeScript',
+    'C#',
+    'Java',
+    'Sri Lanka developer',
   ],
   authors: [{ name: 'Ishan Tharusha' }],
   creator: 'Ishan Tharusha',
@@ -49,7 +57,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://hasan-ashab.vercel.app',
+    url: 'https://portfolio-yy9r.vercel.app',
     title: 'Ishan Tharusha - Full-Stack Developer Portfolio',
     description: 'Full-Stack Developer building web applications with ASP.NET Core, Node.js, React, and Spring Boot.',
     siteName: 'Ishan Tharusha Portfolio',
@@ -62,15 +70,8 @@ export const metadata: Metadata = {
       },
     ],
   },
-  // twitter: {
-  //   card: 'summary_large_image',
-  //   title: 'Hasan Ashab - DevOps & Cloud Engineer Portfolio',
-  //   description: 'Experienced DevOps and Cloud Engineer specializing in AWS, Kubernetes, Docker, and CI/CD.',
-  //   images: ['/profile-pic.png'],
-  //   creator: '@hasanashab',
-  // },
   alternates: {
-    canonical: 'https://hasan-ashab.vercel.app',
+    canonical: 'https://portfolio-yy9r.vercel.app',
   },
   verification: {
     google: 'wUvigUYIHyBvrQMmeBFTg5ixr4HDAdPcPPlyPJSzmc0',
@@ -85,33 +86,38 @@ export default function RootLayout({
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: 'Hasan Ashab',
-    jobTitle: 'DevOps & Cloud Engineer',
-    description: 'Experienced DevOps and Cloud Engineer specializing in AWS, Kubernetes, Docker, and CI/CD automation',
-    url: 'https://hasan-ashab.vercel.app',
+    name: 'Ishan Tharusha',
+    jobTitle: 'Junior Full-Stack Developer',
+    description: 'Junior Full-Stack Developer passionate about building end-to-end web applications using ASP.NET Core, Node.js, React, and Spring Boot',
+    url: 'https://portfolio-yy9r.vercel.app',
     image: '/profile_pic.jpg',
+    email: 'Ishantharusha02@gmail.com',
+    telephone: '+94786733876',
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'LK',
+    },
     sameAs: [
       'https://github.com/Ishan-Tharusha',
       'https://www.linkedin.com/in/ishantharusha',
     ],
     knowsAbout: [
-      'DevOps',
-      'Cloud Engineering', 
-      'AWS',
-      'Kubernetes',
-      'Docker',
-      'CI/CD',
-      'Infrastructure as Code',
-      'Terraform',
-      'Ansible',
-      'Jenkins',
-      'Monitoring',
-      'Automation'
+      'Full-Stack Development',
+      'ASP.NET Core',
+      'Node.js',
+      'React',
+      'Next.js',
+      'Spring Boot',
+      'TypeScript',
+      'C#',
+      'Java',
+      'MongoDB',
+      'MySQL',
     ],
-    worksFor: {
-      '@type': 'Organization',
-      name: 'Elevate Labs'
-    }
+    alumniOf: {
+      '@type': 'CollegeOrUniversity',
+      name: 'Sri Lanka Institute of Information Technology',
+    },
   }
 
   return (
@@ -121,16 +127,16 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <link rel="canonical" href="https://hasan-ashab.vercel.app" />
+        <link rel="canonical" href="https://portfolio-yy9r.vercel.app" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#3b82f6" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#1e40af" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#8B5CF6" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#0a0f1e" media="(prefers-color-scheme: dark)" />
         <meta name="color-scheme" content="light dark" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased overflow-x-hidden font-[family-name:var(--font-inter)]`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
