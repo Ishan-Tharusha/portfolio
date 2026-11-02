@@ -191,7 +191,6 @@ const ContactUs: FC = () => {
 
             {/* Social links */}
             <div className="space-y-3">
-              <p className="text-xs font-mono-code text-muted-foreground uppercase tracking-wider">// Connect on</p>
               <div className="flex gap-3">
                 {socialLinks.map((link) => (
                   <a
