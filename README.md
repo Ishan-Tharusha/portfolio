@@ -160,4 +160,4 @@ Thanks to the open-source community and the original portfolio template this pro
 
 ---
 
-⭐ **Star this repo if you find it helpful!**
+
