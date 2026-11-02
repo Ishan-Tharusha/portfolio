@@ -1,7 +1,7 @@
 {
-  "name": "Hasan Ashab - DevOps & Cloud Engineer Portfolio",
-  "short_name": "Hasan Ashab",
-  "description": "Professional DevOps and Cloud Engineer portfolio showcasing expertise in AWS, Kubernetes, Docker, and CI/CD automation",
+  "name": "Ishan Tharusha - Full-Stack Developer Portfolio",
+  "short_name": "Ishan Tharusha",
+  "description": "Junior full-stack developer portfolio featuring web application projects and skills",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",
@@ -21,7 +21,7 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["portfolio", "devops", "cloud", "engineering"],
+  "categories": ["portfolio", "software", "development"],
   "lang": "en",
   "dir": "ltr"
 }

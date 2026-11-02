@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: 'Ishan Tharusha - Full-Stack Developer Portfolio',
   description: 'Full-Stack Developer portfolio showcasing projects with ASP.NET Core, Node.js, React, and Spring Boot.',
   alternates: {
-    canonical: 'https://hasan-ashab.vercel.app',
+    canonical: 'https://portfolio-yy9r.vercel.app',
   },
 }
 

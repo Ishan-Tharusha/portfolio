@@ -55,7 +55,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   const [visible, setVisible] = useState<boolean>(false)
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
-    if (latest > 100) {
+    if (latest > 50) {
       setVisible(true)
     } else {
       setVisible(false)
@@ -86,8 +86,8 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         boxShadow: visible
           ? '0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset'
           : 'none',
-        width: visible ? '40%' : '100%',
-        y: visible ? 20 : 0,
+        width: '100%',
+        y: 0,
       }}
       transition={{
         type: 'spring',
@@ -258,15 +258,17 @@ export const NavbarLogo = ({ isScrolled }: { isScrolled: boolean }) => {
       className="group flex items-center space-x-3"
       aria-label="Navigate to About section"
     >
-      <Image
-        src="/profile_pic.jpg"
-        alt="Ishan Tharusha"
-        width={32}
-        height={32}
-        className="rounded-full"
-      />
+      <div className="relative h-10 w-10 shrink-0 aspect-square overflow-hidden rounded-full">
+        <Image
+          src="/profile_pic.jpg"
+          alt="Ishan Tharusha"
+          width={40}
+          height={40}
+          className="h-full w-full rounded-full object-cover"
+        />
+      </div>
       {!isScrolled && (
-        <span title="Ishan Tharusha" className="text-lg font-bold group-hover:text-red-500 transition-colors">
+        <span title="Ishan Tharusha" className="text-lg font-bold group-hover:text-violet-500 dark:group-hover:text-violet-400 transition-colors">
           Ishan Tharusha
         </span>
       )}

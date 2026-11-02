@@ -123,9 +123,9 @@ const Timeline: FC = () => {
   }))
 
   return (
-    <section id="education" className="relative py-24 text-foreground transition-colors overflow-hidden">
+    <section id="education" className="relative py-20 text-foreground transition-colors overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 -z-10 pointer-events-none">
+      <div className="absolute inset-0 -z-10 pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(139, 92, 246, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 92, 246, 0.025) 1px, transparent 1px), radial-gradient(ellipse at 72% 18%, rgba(6, 182, 212, 0.10), transparent 36%)', backgroundSize: '48px 48px, 48px 48px, auto' }}>
         <div className="absolute top-1/3 right-1/4 w-[500px] h-[400px] bg-violet-600/8 rounded-full blur-[100px]" />
         <div className="absolute bottom-1/3 left-1/4 w-[400px] h-[300px] bg-cyan-500/6 rounded-full blur-[80px]" />
       </div>
@@ -138,7 +138,7 @@ const Timeline: FC = () => {
           transition={{ duration: 0.7 }}
           className="text-center mb-16 space-y-4"
         >
-          <p className="code-tag text-violet-accent">{'<Education />'}</p>
+          <p className="text-sm font-semibold text-violet-400">Education</p>
           <h2 title="Education" className="text-4xl sm:text-5xl font-black tracking-tight">
             <span className="gradient-text">Academic</span>{' '}
             <span className="text-foreground dark:text-white">Journey</span>

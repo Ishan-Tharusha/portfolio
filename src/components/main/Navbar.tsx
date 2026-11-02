@@ -62,10 +62,10 @@ export function Navbar() {
         : 'mx-0 mt-0'
       }`}>
         <NavbarWrapper
-          className={`flex flex-col items-center justify-between gap-4 px-4 py-2 transition-all duration-500 ${
+          className={`flex flex-col items-center justify-between gap-4 transition-all duration-500 ${
             isScrolled
-              ? 'rounded-2xl glass shadow-violet border border-violet-500/20 mx-auto max-w-4xl'
-              : 'border-b border-transparent bg-transparent'
+              ? 'mx-auto max-w-4xl px-0 py-0'
+              : 'px-4 py-2 border-b border-transparent bg-transparent'
           }`}
         >
           <NavBody>
@@ -97,7 +97,7 @@ export function Navbar() {
                 <Button
                   title="Contact me"
                   variant="default"
-                  className="rounded-full bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white border-0 shadow-violet transition-all duration-300 hover:shadow-violet-lg"
+                  className="rounded-full bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white border-0 shadow-violet transition-all duration-300 hover:shadow-violet-lg"
                   onClick={() => {
                     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
                   }}

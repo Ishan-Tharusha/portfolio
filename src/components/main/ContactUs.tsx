@@ -97,9 +97,9 @@ const ContactUs: FC = () => {
   ]
 
   return (
-    <section id="contact" className="relative py-24 overflow-hidden">
+    <section id="contact" className="relative py-20 overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 -z-10 pointer-events-none">
+      <div className="absolute inset-0 -z-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(ellipse at 15% 22%, rgba(139, 92, 246, 0.12), transparent 40%), radial-gradient(ellipse at 88% 76%, rgba(6, 182, 212, 0.10), transparent 42%), linear-gradient(135deg, transparent 46%, rgba(139, 92, 246, 0.025) 50%, transparent 54%)', backgroundSize: 'auto' }}>
         <div className="absolute top-1/3 left-1/4 w-[500px] h-[400px] bg-violet-600/8 rounded-full blur-[100px]" />
         <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[300px] bg-cyan-500/6 rounded-full blur-[80px]" />
       </div>
@@ -113,7 +113,7 @@ const ContactUs: FC = () => {
           transition={{ duration: 0.7 }}
           className="text-center mb-16 space-y-4"
         >
-          <p className="code-tag text-violet-accent">{'<Contact />'}</p>
+          <p className="text-sm font-semibold text-violet-400">Contact</p>
           <h2 title="Connect With Me" className="text-4xl sm:text-5xl font-black tracking-tight">
             <span className="gradient-text">Let&apos;s</span>{' '}
             <span className="text-foreground dark:text-white">Connect</span>

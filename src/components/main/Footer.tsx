@@ -34,12 +34,12 @@ const Footer: FC = () => {
   const techStack = ['ASP.NET Core', 'Node.js', 'React', 'Next.js', 'Spring Boot', 'TypeScript']
 
   return (
-    <footer className="relative w-full border-t border-border/30 mt-8 overflow-hidden">
+    <footer className="relative w-full border-t border-border/30 mt-4 overflow-hidden">
       {/* Gradient top border */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-violet-500/60 to-transparent" />
 
       {/* Background */}
-      <div className="absolute inset-0 -z-10 pointer-events-none">
+      <div className="absolute inset-0 -z-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(ellipse at 24% 25%, rgba(139, 92, 246, 0.10), transparent 40%), radial-gradient(rgba(6, 182, 212, 0.06) 1px, transparent 1px)', backgroundSize: 'auto, 26px 26px' }}>
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] bg-violet-600/5 rounded-full blur-[80px]" />
       </div>
 
@@ -56,7 +56,7 @@ const Footer: FC = () => {
             <div>
               <h2 className="text-xl font-black gradient-text-static">Ishan Tharusha</h2>
               <p className="text-xs font-mono-code text-muted-foreground mt-1">
-                {'<Junior Full-Stack Developer />'}
+                Junior Full-Stack Developer
               </p>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
@@ -84,8 +84,8 @@ const Footer: FC = () => {
 
           {/* Navigation */}
           <div className="space-y-4">
-            <h3 className="text-xs font-mono-code text-muted-foreground uppercase tracking-wider">
-              // Navigation
+            <h3 className="text-sm font-semibold text-foreground">
+              Quick Links
             </h3>
             <ul className="grid grid-cols-2 gap-2">
               {navLinks.map((item) => (
@@ -109,8 +109,8 @@ const Footer: FC = () => {
 
           {/* Tech stack */}
           <div className="space-y-4">
-            <h3 className="text-xs font-mono-code text-muted-foreground uppercase tracking-wider">
-              // Tech Stack
+            <h3 className="text-sm font-semibold text-foreground">
+              Technologies
             </h3>
             <div className="flex flex-wrap gap-2">
               {techStack.map((tech) => (
