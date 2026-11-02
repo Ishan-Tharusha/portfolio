@@ -40,6 +40,18 @@ const Skills = () => {
       className="relative flex flex-col items-center justify-center gap-12 py-20 px-4 sm:px-8 min-h-[600px] overflow-hidden"
       aria-labelledby="skills-heading"
     >
+      {/* Background image */}
+      <div
+        className="absolute inset-0 -z-20 pointer-events-none"
+        style={{
+          backgroundImage: 'url(/backgrounds/skills-bg.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.10,
+        }}
+      />
+
       {/* Background */}
       <div className="absolute inset-0 -z-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(rgba(139, 92, 246, 0.055) 1px, transparent 1px), radial-gradient(ellipse at 78% 20%, rgba(6, 182, 212, 0.08), transparent 44%)', backgroundSize: '30px 30px, auto' }}>
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-violet-600/8 rounded-full blur-[100px]" />

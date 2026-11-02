@@ -6,6 +6,18 @@ export function Hero() {
       id="about"
       className="relative flex flex-col min-h-screen w-full items-center justify-center overflow-hidden"
     >
+      {/* ── Background image ── */}
+      <div
+        className="absolute inset-0 -z-20 pointer-events-none"
+        style={{
+          backgroundImage: 'url(/backgrounds/hero-bg.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.12,
+        }}
+      />
+
       {/* ── Background mesh gradient ── */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         {/* Large ambient orbs */}

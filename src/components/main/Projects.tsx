@@ -275,6 +275,18 @@ const Projects = () => {
 
   return (
     <section id="projects" className="relative py-20 overflow-hidden">
+      {/* Background image */}
+      <div
+        className="absolute inset-0 -z-20 pointer-events-none"
+        style={{
+          backgroundImage: 'url(/backgrounds/projects-bg.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.10,
+        }}
+      />
+
       {/* Background */}
       <div className="absolute inset-0 -z-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(ellipse at 16% 76%, rgba(6, 182, 212, 0.09), transparent 38%), radial-gradient(ellipse at 86% 18%, rgba(139, 92, 246, 0.09), transparent 42%), repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.012) 0 1px, transparent 1px 16px)', backgroundSize: 'auto, auto, auto' }}>
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-violet-600/8 rounded-full blur-[100px]" />

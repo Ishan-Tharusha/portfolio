@@ -98,6 +98,18 @@ const ContactUs: FC = () => {
 
   return (
     <section id="contact" className="relative py-20 overflow-hidden">
+      {/* Background image */}
+      <div
+        className="absolute inset-0 -z-20 pointer-events-none"
+        style={{
+          backgroundImage: 'url(/backgrounds/contact-bg.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.10,
+        }}
+      />
+
       {/* Background */}
       <div className="absolute inset-0 -z-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(ellipse at 15% 22%, rgba(139, 92, 246, 0.12), transparent 40%), radial-gradient(ellipse at 88% 76%, rgba(6, 182, 212, 0.10), transparent 42%), linear-gradient(135deg, transparent 46%, rgba(139, 92, 246, 0.025) 50%, transparent 54%)', backgroundSize: 'auto' }}>
         <div className="absolute top-1/3 left-1/4 w-[500px] h-[400px] bg-violet-600/8 rounded-full blur-[100px]" />

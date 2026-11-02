@@ -124,6 +124,18 @@ const Timeline: FC = () => {
 
   return (
     <section id="education" className="relative py-20 text-foreground transition-colors overflow-hidden">
+      {/* Background image */}
+      <div
+        className="absolute inset-0 -z-20 pointer-events-none"
+        style={{
+          backgroundImage: 'url(/backgrounds/education-bg.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.10,
+        }}
+      />
+
       {/* Background */}
       <div className="absolute inset-0 -z-10 pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(139, 92, 246, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 92, 246, 0.025) 1px, transparent 1px), radial-gradient(ellipse at 72% 18%, rgba(6, 182, 212, 0.10), transparent 36%)', backgroundSize: '48px 48px, 48px 48px, auto' }}>
         <div className="absolute top-1/3 right-1/4 w-[500px] h-[400px] bg-violet-600/8 rounded-full blur-[100px]" />

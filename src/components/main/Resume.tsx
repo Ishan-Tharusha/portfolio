@@ -37,6 +37,18 @@ const ResumeSection = () => {
       id="resume"
       className="relative py-20 px-6 flex flex-col items-center overflow-hidden"
     >
+      {/* Background image */}
+      <div
+        className="absolute inset-0 -z-20 pointer-events-none"
+        style={{
+          backgroundImage: 'url(/backgrounds/resume-bg.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.10,
+        }}
+      />
+
       {/* Background */}
       <div className="absolute inset-0 -z-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(ellipse at 50% 35%, rgba(139, 92, 246, 0.10), transparent 48%), linear-gradient(90deg, rgba(6, 182, 212, 0.035) 1px, transparent 1px)', backgroundSize: 'auto, 64px 64px' }}>
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-violet-600/8 rounded-full blur-[100px]" />
