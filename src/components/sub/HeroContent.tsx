@@ -218,7 +218,7 @@ const HeroContent: FC = () => {
           >
             <span className="text-cyan-accent">SLIIT</span>
             <span className="text-muted-foreground mx-1">·</span>
-            <span className="text-foreground/80">2022–2026</span>
+            <span className="text-foreground/80">Graduated in 2026</span>
           </motion.div>
         </div>
       </motion.div>

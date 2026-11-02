@@ -12,14 +12,6 @@ const Page = dynamic(() => import('react-pdf').then((mod) => mod.Page), { ssr: f
 import 'react-pdf/dist/Page/AnnotationLayer.css'
 import 'react-pdf/dist/Page/TextLayer.css'
 
-const highlights = [
-  { label: 'Frontend', value: 'React · Next.js · TypeScript · Tailwind', color: 'text-pink-400' },
-  { label: 'Backend', value: 'ASP.NET Core · Node.js · Spring Boot', color: 'text-emerald-400' },
-  { label: 'Languages', value: 'C# · Java · TypeScript · Python', color: 'text-violet-400' },
-  { label: 'Databases', value: 'MongoDB · MySQL', color: 'text-cyan-400' },
-  { label: 'Tools', value: 'Git · Docker · Postman · GitHub', color: 'text-amber-400' },
-]
-
 const ResumeSection = () => {
   const [error, setError] = useState<string | null>(null)
   const [numPages, setNumPages] = useState<number | null>(null)
@@ -84,15 +76,8 @@ const ResumeSection = () => {
 
           {/* Info */}
           <div className="flex-1 text-center sm:text-left">
-            <h3 className="text-xl font-bold text-foreground mb-1">Ishan Tharusha — Resume 2026</h3>
-            <p className="text-sm text-muted-foreground mb-3">Full-Stack Developer · SLIIT Graduate (2026)</p>
-            <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
-              {highlights.map((h) => (
-                <span key={h.label} className={`text-xs font-mono-code ${h.color} opacity-80`}>
-                  {h.label}
-                </span>
-              ))}
-            </div>
+            <h3 className="text-xl font-bold text-foreground mb-1">Ishan Tharusha — Resume</h3>
+            <p className="text-sm text-muted-foreground">Junior Full-Stack Developer · BSc (Hons) in Information Technology, graduated in 2026</p>
           </div>
 
           {/* CTA buttons */}
@@ -117,31 +102,6 @@ const ResumeSection = () => {
               {showPdf ? 'Hide' : 'Preview'}
             </motion.button>
           </div>
-        </div>
-      </motion.div>
-
-      {/* Skills highlights */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-        className="w-full max-w-4xl mb-10 relative z-10"
-      >
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-          {highlights.map((h, i) => (
-            <motion.div
-              key={h.label}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.07 }}
-              className="glass-card rounded-xl p-4 text-center space-y-1"
-            >
-              <p className={`text-xs font-bold font-mono-code ${h.color}`}>{h.label}</p>
-              <p className="text-xs text-muted-foreground leading-relaxed">{h.value}</p>
-            </motion.div>
-          ))}
         </div>
       </motion.div>
 

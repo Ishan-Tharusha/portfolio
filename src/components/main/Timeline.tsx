@@ -24,12 +24,12 @@ export const timelineData: TimelineItem[] = [
   {
     id: 1,
     type: 'work',
-    title: 'B.Sc. (Hons) in Information Technology',
+    title: 'BSc (Hons) in Information Technology',
     company: 'Sri Lanka Institute of Information Technology',
     location: 'Sri Lanka',
     imageURL: '/SLIIT_Logo_Crest.png',
-    date: '2022 – 2026',
-    description: 'Pursuing a Bachelor of Science (Honours) degree in Information Technology, gaining in-depth knowledge in software engineering, web development, databases, and cloud computing.',
+    date: 'Graduated in 2026',
+    description: 'Graduated in 2026 with a BSc (Hons) in Information Technology.',
     achievements: [
       'Built full-stack web applications using ASP.NET Core, Node.js, React, and Spring Boot',
       'Designed RESTful APIs and implemented authentication and validation mechanisms',
